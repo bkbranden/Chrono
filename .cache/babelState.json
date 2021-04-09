@@ -24,9 +24,9 @@
           "name": "/Users/brandenkim/FunProjects/Chrono/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -59,9 +59,9 @@
           "name": "/Users/brandenkim/FunProjects/Chrono/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -94,9 +94,9 @@
           "name": "/Users/brandenkim/FunProjects/Chrono/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],
@@ -129,9 +129,9 @@
           "name": "/Users/brandenkim/FunProjects/Chrono/node_modules/@babel/preset-typescript/lib/index.js",
           "options": {
             "plugins": [],
-            "allExtensions": false,
             "isTSX": false,
-            "jsxPragma": "React"
+            "jsxPragma": "React",
+            "allExtensions": false
           }
         }
       ],

@@ -19,44 +19,46 @@ var plugins = []; // During bootstrap, we write requires at top of this file whi
 //   },
 // ]
 
-const apis = __webpack_require__(/*! ./api-ssr-docs */ "./.cache/api-ssr-docs.js"); // Run the specified API in any plugins that have implemented it
+var apis = __webpack_require__(/*! ./api-ssr-docs */ "./.cache/api-ssr-docs.js"); // Run the specified API in any plugins that have implemented it
 
 
-module.exports = (api, args, defaultReturn, argTransform) => {
+module.exports = function (api, args, defaultReturn, argTransform) {
   if (!apis[api]) {
-    console.log(`This API doesn't exist`, api);
+    console.log("This API doesn't exist", api);
   } // Run each plugin in series.
   // eslint-disable-next-line no-undef
 
 
-  let results = plugins.map(plugin => {
+  var results = plugins.map(function (plugin) {
     if (!plugin.plugin[api]) {
       return undefined;
     }
 
     try {
-      const result = plugin.plugin[api](args, plugin.options);
+      var result = plugin.plugin[api](args, plugin.options);
 
       if (result && argTransform) {
         args = argTransform({
-          args,
-          result
+          args: args,
+          result: result
         });
       }
 
       return result;
     } catch (e) {
-      if (plugin.name !== `default-site-plugin`) {
+      if (plugin.name !== "default-site-plugin") {
         // default-site-plugin is user code and will print proper stack trace,
         // so no point in annotating error message pointing out which plugin is root of the problem
-        e.message += ` (from plugin: ${plugin.name})`;
+        e.message += " (from plugin: ".concat(plugin.name, ")");
       }
 
       throw e;
     }
   }); // Filter out undefined results.
 
-  results = results.filter(result => typeof result !== `undefined`);
+  results = results.filter(function (result) {
+    return typeof result !== "undefined";
+  });
 
   if (results.length > 0) {
     return results;
@@ -308,7 +310,7 @@ function HTML(props) {
     name: "viewport",
     content: "width=device-width, initial-scale=1, shrink-to-fit=no"
   }), props.headComponents), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("body", props.bodyAttributes, props.preBodyComponents, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    key: `body`,
+    key: "body",
     id: "___gatsby",
     dangerouslySetInnerHTML: {
       __html: props.body
@@ -4900,134 +4902,146 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_runner_ssr__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_api_runner_ssr__WEBPACK_IMPORTED_MODULE_3__);
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
  // import testRequireError from "./test-require-error"
 // For some extremely mysterious reason, webpack adds the above module *after*
 // this module so that when this code runs, testRequireError is undefined.
 // So in the meantime, we'll just inline it.
 
-const testRequireError = (moduleName, err) => {
-  const regex = new RegExp(`Error: Cannot find module\\s.${moduleName}`);
-  const firstLine = err.toString().split(`\n`)[0];
+var testRequireError = function testRequireError(moduleName, err) {
+  var regex = new RegExp("Error: Cannot find module\\s.".concat(moduleName));
+  var firstLine = err.toString().split("\n")[0];
   return regex.test(firstLine);
 };
 
-let Html;
+var Html;
 
 try {
   Html = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module '../src/html'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 } catch (err) {
-  if (testRequireError(`../src/html`, err)) {
+  if (testRequireError("../src/html", err)) {
     Html = __webpack_require__(/*! ./default-html */ "./.cache/default-html.js");
   } else {
-    console.log(`There was an error requiring "src/html.js"\n\n`, err, `\n\n`);
+    console.log("There was an error requiring \"src/html.js\"\n\n", err, "\n\n");
     process.exit();
   }
 }
 
-Html = Html && Html.__esModule ? Html.default : Html;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (({
-  pagePath
-}) => {
-  let headComponents = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
+Html = Html && Html.__esModule ? Html["default"] : Html;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (_ref) {
+  var pagePath = _ref.pagePath;
+  var headComponents = [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("meta", {
     key: "environment",
     name: "note",
     content: "environment=development"
   })];
-  let htmlAttributes = {};
-  let bodyAttributes = {};
-  let preBodyComponents = [];
-  let postBodyComponents = [];
-  let bodyProps = {};
-  let htmlStr;
+  var htmlAttributes = {};
+  var bodyAttributes = {};
+  var preBodyComponents = [];
+  var postBodyComponents = [];
+  var bodyProps = {};
+  var htmlStr;
 
-  const setHeadComponents = components => {
+  var setHeadComponents = function setHeadComponents(components) {
     headComponents = headComponents.concat(components);
   };
 
-  const setHtmlAttributes = attributes => {
+  var setHtmlAttributes = function setHtmlAttributes(attributes) {
     htmlAttributes = lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()(htmlAttributes, attributes);
   };
 
-  const setBodyAttributes = attributes => {
+  var setBodyAttributes = function setBodyAttributes(attributes) {
     bodyAttributes = lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()(bodyAttributes, attributes);
   };
 
-  const setPreBodyComponents = components => {
+  var setPreBodyComponents = function setPreBodyComponents(components) {
     preBodyComponents = preBodyComponents.concat(components);
   };
 
-  const setPostBodyComponents = components => {
+  var setPostBodyComponents = function setPostBodyComponents(components) {
     postBodyComponents = postBodyComponents.concat(components);
   };
 
-  const setBodyProps = props => {
+  var setBodyProps = function setBodyProps(props) {
     bodyProps = lodash_merge__WEBPACK_IMPORTED_MODULE_0___default()({}, bodyProps, props);
   };
 
-  const getHeadComponents = () => headComponents;
+  var getHeadComponents = function getHeadComponents() {
+    return headComponents;
+  };
 
-  const replaceHeadComponents = components => {
+  var replaceHeadComponents = function replaceHeadComponents(components) {
     headComponents = components;
   };
 
-  const getPreBodyComponents = () => preBodyComponents;
+  var getPreBodyComponents = function getPreBodyComponents() {
+    return preBodyComponents;
+  };
 
-  const replacePreBodyComponents = components => {
+  var replacePreBodyComponents = function replacePreBodyComponents(components) {
     preBodyComponents = components;
   };
 
-  const getPostBodyComponents = () => postBodyComponents;
+  var getPostBodyComponents = function getPostBodyComponents() {
+    return postBodyComponents;
+  };
 
-  const replacePostBodyComponents = components => {
+  var replacePostBodyComponents = function replacePostBodyComponents(components) {
     postBodyComponents = components;
   };
 
-  _api_runner_ssr__WEBPACK_IMPORTED_MODULE_3___default()(`onRenderBody`, {
-    setHeadComponents,
-    setHtmlAttributes,
-    setBodyAttributes,
-    setPreBodyComponents,
-    setPostBodyComponents,
-    setBodyProps,
+  _api_runner_ssr__WEBPACK_IMPORTED_MODULE_3___default()("onRenderBody", {
+    setHeadComponents: setHeadComponents,
+    setHtmlAttributes: setHtmlAttributes,
+    setBodyAttributes: setBodyAttributes,
+    setPreBodyComponents: setPreBodyComponents,
+    setPostBodyComponents: setPostBodyComponents,
+    setBodyProps: setBodyProps,
     pathname: pagePath
   });
-  _api_runner_ssr__WEBPACK_IMPORTED_MODULE_3___default()(`onPreRenderHTML`, {
-    getHeadComponents,
-    replaceHeadComponents,
-    getPreBodyComponents,
-    replacePreBodyComponents,
-    getPostBodyComponents,
-    replacePostBodyComponents,
+  _api_runner_ssr__WEBPACK_IMPORTED_MODULE_3___default()("onPreRenderHTML", {
+    getHeadComponents: getHeadComponents,
+    replaceHeadComponents: replaceHeadComponents,
+    getPreBodyComponents: getPreBodyComponents,
+    replacePreBodyComponents: replacePreBodyComponents,
+    getPostBodyComponents: getPostBodyComponents,
+    replacePostBodyComponents: replacePostBodyComponents,
     pathname: pagePath
   });
-  const htmlElement = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(Html, { ...bodyProps,
-    body: ``,
+  var htmlElement = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(Html, _objectSpread(_objectSpread({}, bodyProps), {}, {
+    body: "",
     headComponents: headComponents.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("script", {
-      key: `io`,
+      key: "io",
       src: "/socket.io/socket.io.js"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("link", {
       key: "styles",
       rel: "stylesheet",
       href: "/commons.css"
     })]),
-    htmlAttributes,
-    bodyAttributes,
-    preBodyComponents,
+    htmlAttributes: htmlAttributes,
+    bodyAttributes: bodyAttributes,
+    preBodyComponents: preBodyComponents,
     postBodyComponents: postBodyComponents.concat([/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("script", {
-      key: `polyfill`,
+      key: "polyfill",
       src: "/polyfill.js",
       noModule: true
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("script", {
-      key: `framework`,
+      key: "framework",
       src: "/framework.js"
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("script", {
-      key: `commons`,
+      key: "commons",
       src: "/commons.js"
     })])
-  });
+  }));
   htmlStr = (0,react_dom_server__WEBPACK_IMPORTED_MODULE_2__.renderToStaticMarkup)(htmlElement);
-  htmlStr = `<!DOCTYPE html>${htmlStr}`;
+  htmlStr = "<!DOCTYPE html>".concat(htmlStr);
   return htmlStr;
 });
 })();
